@@ -5,7 +5,7 @@ require '../db.php';
 // 1. Получаем все товары из базы
 // ORDER BY id DESC означает "сначала новые"
 $stmt = $pdo->query("SELECT * FROM tickets ORDER BY id DESC");
-$products = $stmt->fetchAll();
+$tickets = $stmt->fetchAll();
 ?>
 
 
@@ -27,6 +27,7 @@ $products = $stmt->fetchAll();
             <span class="me-3">Привет!</span>
             <?php if ($_SESSION['user_role'] === 'admin'): ?>
                 <a href="admin_panel.php" class="btn btn-outline-danger btn-sm">Админка</a>
+                <a href="admin_orders.php" class="btn btn-outline-primary btn-sm">Отклики</a>
                 <a href="add_item.php" class="btn btn-success btn-sm">+ Добавить товар</a>
             <?php endif; ?>
             <a href="logout.php" class="btn btn-dark btn-sm">Выйти</a>
@@ -42,24 +43,24 @@ $products = $stmt->fetchAll();
     <h2 class="mb-4">Каталог товаров</h2>
     
     <div class="row">
-        <?php foreach ($products as $product): ?>
+        <?php foreach ($tickets as $ticket): ?>
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <!-- Если картинки нет, ставим заглушку -->
-                    <h5 class="card-title"><?= htmlspecialchars($product['subject']) ?></h5>
+                    <h5 class="card-title"><?= htmlspecialchars($ticket['subject']) ?></h5>
                     
                     <div class="card-body">
-                        <p class="card-text text-truncate"><?= htmlspecialchars($product['message']) ?></p>
-                        <p class="card-text fw-bold text-primary"><?= h($product['price']) ?> ₽</p>
+                        <p class="card-text text-truncate"><?= htmlspecialchars($ticket['message']) ?></p>
+                        <p class="card-text fw-bold text-primary"><?= h($ticket['price']) ?> ₽</p>
                     </div>
                     <div class="card-footer bg-white border-top-0">
-                        <a href="#" class="btn btn-primary w-100">откликнуться</a>
+                        <a href="make_order.php?id=<?= $ticket['id'] ?>" class="btn btn-primary">Откликнуться</a>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
         
-        <?php if (count($products) === 0): ?>
+        <?php if (count($tickets) === 0): ?>
             <p class="text-muted">Товаров пока нет. Зайдите под админом и добавьте их.</p>
         <?php endif; ?>
     </div>
