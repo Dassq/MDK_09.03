@@ -46,7 +46,7 @@ $my_orders = $stmt->fetchAll();
     <!-- Навигация -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Мой Проект</a>
+            <a class="navbar-brand" href="index.php">Биржа фриланс-услуг</a>
             <div class="d-flex">
                 <span class="navbar-text text-white me-3">
                     Вы вошли как: <b><?= htmlspecialchars($_SESSION['user_role'] ?? 'User') ?></b>
@@ -58,7 +58,16 @@ $my_orders = $stmt->fetchAll();
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="<? htmlspecialchars($user_avatar) ?>" class="rounded-circle border-2 border-dark mt-4" style="object-fit: cover; height: 100px;"
+                        <h2 class="mb-0">Мой профиль</h2>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-9">
                 <div class="card shadow-sm">
                     <div class="card-header bg-white">
                         <h2 class="mb-0">Мои заказы</h2>
@@ -128,6 +137,14 @@ $my_orders = $stmt->fetchAll();
                     </div>
                 </div>
             </div>
+             <!-- profile.php или add_item.php -->
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                <div class="col-md-3">
+                    <label class="form-label">Выберите изображение:</label>
+                    <input type="file" name="file" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">Загрузить</button>
+            </form>
         </div>
     </div>
 

@@ -15,9 +15,12 @@ require 'check_admin.php';
         <div class="alert alert-success">
             <h1>Панель Администратора</h1>
             <p>Добро пожаловать, Повелитель!</p>
-            <p>Здесь вы будете управлять: <?php echo "Ваша тема курсовой"; ?></p>
+            <p>Здесь вы будете управлять: <?php echo "Биржа фриланс-услуг"; ?></p>
         </div>
         
+        <a href="index.php" class="btn btn-outline-danger btn-sm">Главная</a>
+        <a href="admin_orders.php" class="btn btn-outline-primary btn-sm">Отклики</a>
+        <a href="add_item.php" class="btn btn-success btn-sm">+ Добавить товар</a>
         <a href="logout.php" class="btn btn-danger">Выйти</a>
     </div>
 </body>

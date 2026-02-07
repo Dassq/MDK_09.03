@@ -28,8 +28,14 @@ $orders = $stmt->fetchAll();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="p-4">
-    <h1>Все заказы</h1>
-    <a href="index.php">На главную</a>
+    <div class="container">
+        <h1>Все заказы</h1>
+        
+        <a href="index.php" class="btn btn-outline-danger btn-sm">Главная</a>
+        <a href="admin_orders.php" class="btn btn-outline-primary btn-sm">Отклики</a>
+        <a href="add_item.php" class="btn btn-success btn-sm">+ Добавить товар</a>
+        <a href="logout.php" class="btn btn-danger">Выйти</a>
+    </div>
     
     <table class="table table-bordered mt-3">
         <thead>
