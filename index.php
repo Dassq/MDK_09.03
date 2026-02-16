@@ -18,7 +18,21 @@ if (!empty($_GET['category_id'])) {
     $params[] = $_GET['category_id'];
 }
 
-// 3. Склеиваем условия, если они есть
+// 4. (Опционально) Фильтрация по минимальной цене
+if (!empty($_GET['min_price'])) {
+    $where_clauses[] = "price >= ?";
+    $params[] = floatval($_GET['min_price']); // Преобразуем цену в число
+}
+
+// 5. (Опционально) Фильтрация по максимальной цене
+if (!empty($_GET['max_price'])) {
+    $where_clauses[] = "price <= ?";
+    $params[] = floatval($_GET['max_price']);
+}
+
+// Далее продолжаем построение запроса, как было ранее...
+
+// 6. Склеиваем условия, если они есть
 if (count($where_clauses) > 0) {
     $sql .= " WHERE " . implode(" AND ", $where_clauses);
 }
@@ -87,7 +101,7 @@ $tickets = $stmt->fetchAll();
         
         
         <!-- Форма для ввода минимального и максимального ценового диапазона -->
-        <form action="search.php" method="GET">
+        <form action="index.php" method="GET">
             <label for="min_price">От:</label>
             <input type="number" name="min_price" placeholder="Минимальная цена" value="<?php echo isset($_GET['min_price']) ? htmlspecialchars($_GET['min_price'], ENT_QUOTES) : ''; ?>">
         

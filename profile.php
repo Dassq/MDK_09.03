@@ -11,6 +11,10 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+$stmt = $pdo->prepare("SELECT avatar_url FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user_avatar = $stmt->fetchColumn();
+
 // 3. БЕЗОПАСНЫЙ ЗАПРОС (Anti-IDOR)
 // Мы выбираем только те заказы, где user_id совпадает с текущим пользователем.
 // Используем JOIN, чтобы получить название товара и цену из таблицы products.
@@ -61,8 +65,8 @@ $my_orders = $stmt->fetchAll();
             <div class="col-md-3">
                 <div class="card shadow-sm">
                     <div class="d-flex flex-column align-items-center">
-                        <img src="<? htmlspecialchars($user_avatar) ?>" class="rounded-circle border-2 border-dark mt-4" style="object-fit: cover; height: 100px;"
-                        <h2 class="mb-0">Мой профиль</h2>
+                        <img src="<? htmlspecialchars($user_avatar) ?>" class="rounded-circle border-2 border-dark mt-4" style="object-fit: cover; height: 100px; width: 100px;">
+                        <h3 class="mb-0">Мой профиль</h3>
                     </div>
                 </div>
             </div>
